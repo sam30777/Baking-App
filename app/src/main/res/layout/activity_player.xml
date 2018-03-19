@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.android.bakingapp.ui.PlayerActivity">
+
+   <FrameLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:id="@+id/videoContainer">
+      
+   </FrameLayout>
+   <ImageView
+       android:layout_width="48dp"
+       android:layout_height="48dp"
+       android:src="@drawable/navigateback"
+       android:layout_alignParentBottom="true"
+       android:layout_marginLeft="16dp"
+       android:layout_marginBottom="16dp"
+       android:id="@+id/previousImage"
+       android:background="#795548"
+       android:tint="@android:color/white"
+       />
+   <TextView
+       android:layout_width="wrap_content"
+       android:layout_height="48dp"
+       android:id="@+id/previousVideo"
+       android:text="Previous"
+       android:paddingTop="8dp"
+       android:paddingBottom="8dp"
+       android:paddingRight="8dp"
+       android:layout_toEndOf="@+id/previousImage"
+       android:layout_alignParentBottom="true"
+       android:layout_marginBottom="16dp"
+       android:textSize="24sp"
+       android:background="#795548"
+       android:textColor="@android:color/white"/>
+   <ImageView
+       android:layout_width="48dp"
+       android:layout_height="48dp"
+       android:src="@drawable/next"
+       android:layout_alignParentBottom="true"
+       android:layout_alignParentEnd="true"
+       android:layout_marginEnd="16dp"
+       android:layout_marginBottom="16dp"
+       android:id="@+id/nextImage"
+       android:background="#795548"
+       android:tint="@android:color/white"
+       />
+   <TextView
+       android:layout_width="wrap_content"
+       android:layout_height="48dp"
+       android:text="Next"
+       android:layout_alignParentBottom="true"
+       android:background="#795548"
+       android:paddingTop="8dp"
+       android:paddingLeft="8dp"
+       android:paddingBottom="8dp"
+       android:layout_marginBottom="16dp"
+       android:id="@+id/nextText"
+       android:textColor="@android:color/white"
+       android:layout_toLeftOf="@+id/nextImage"
+       android:textSize="24sp"/>
+
+</RelativeLayout>
