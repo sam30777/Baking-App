@@ -29,7 +29,8 @@
 
         <receiver android:name=".widgets.CakeWidget">
             <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
+                    <action android:name="com.example.android.IngredientsUpdated"/>
             </intent-filter>
 
             <meta-data
@@ -38,6 +39,7 @@
         </receiver>
         <service
             android:name=".widgets.IngredientsService"
+
             android:permission="android.permission.BIND_REMOTEVIEWS" />
     </application>
 

@@ -1,8 +1,10 @@
 package com.example.android.bakingapp.ui;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.appwidget.AppWidgetManager;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -23,13 +25,16 @@ import com.example.android.bakingapp.data.Ingredients_Data;
 import com.example.android.bakingapp.data.Instructions_Data;
 import com.example.android.bakingapp.data.Recipe_data;
 import com.example.android.bakingapp.R;
+
 import com.example.android.bakingapp.widgets.IngredientsService;
+
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+
 
 public class Recipe extends AppCompatActivity implements RecipeAdapter.ListItemClickListner {
 
@@ -40,6 +45,7 @@ public class Recipe extends AppCompatActivity implements RecipeAdapter.ListItemC
     private RecyclerView.Adapter rAdapter;
     private ArrayList<Recipe_data> re;
     private Integer recipe_widget_id;
+    public static ArrayList<Ingredients_Data> ing;
     private Boolean isWidgetIntent=false;
     private String  Widget_Action ="android.appwidget.action.APPWIDGET_CONFIGURE";
     public Recipe() {
@@ -142,19 +148,21 @@ public class Recipe extends AppCompatActivity implements RecipeAdapter.ListItemC
     public void onItemClicked(int listItemIndex) {
         Recipe_data recipe_data = re.get(listItemIndex);
         if(isWidgetIntent){
-            AppWidgetManager appWidgetManager=AppWidgetManager.getInstance(this);
-            Intent serviceIntent = new Intent(this, IngredientsService.class);
+                ing=re.get(listItemIndex).getIngredients_data();
+           Intent intent=new Intent();
+            intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,recipe_widget_id);
+            setResult(Activity.RESULT_OK,intent);
+            Intent serviceIntent = new Intent(Recipe.this, IngredientsService.class);
             serviceIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,recipe_widget_id);
-            serviceIntent.putExtra("Object", recipe_data);
-            serviceIntent.putExtra("Position", listItemIndex);
-            RemoteViews views = new RemoteViews(this.getPackageName(), R.layout.cake_widget);
+            serviceIntent.setData(Uri.parse(serviceIntent.toUri(Intent.URI_INTENT_SCHEME)));
+            RemoteViews views = new RemoteViews(getPackageName(), R.layout.cake_widget);
+            views.setTextViewText(R.id.recipe_widget_name,re.get(listItemIndex).getRecipe_Name());
             views.setRemoteAdapter(R.id.ingredients_widgets_list, serviceIntent);
+            AppWidgetManager appWidgetManager=AppWidgetManager.getInstance(Recipe.this);
             appWidgetManager.updateAppWidget(recipe_widget_id, views);
-            Intent resultValue = new Intent();
-            resultValue.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,recipe_widget_id);
-            setResult(RESULT_OK, resultValue);
             finish();
         }else{
+
         Intent intent = new Intent(Recipe.this, StepDesc.class);
         intent.putExtra("Object", recipe_data);
         intent.putExtra("Position", listItemIndex);
