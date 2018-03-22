@@ -74,7 +74,7 @@ public class IngredientsFactory implements RemoteViewsService.RemoteViewsFactory
     @Override
     public RemoteViews getViewAt(int i) {
 
-        RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.ingredients_item);
+        RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.list_item_widget);
         remoteViews.setTextViewText(R.id.ingName1, ingredients_dataArrayList.get(i).getIngredient_name());
         remoteViews.setTextViewText(R.id.quantity, String.valueOf(ingredients_dataArrayList.get(i).getQuantity()));
         remoteViews.setTextViewText(R.id.measureIng1, ingredients_dataArrayList.get(i).getMeas());
